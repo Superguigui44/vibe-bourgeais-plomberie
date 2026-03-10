@@ -5,12 +5,12 @@ import { getCollection } from 'astro:content';
 const posts = (await getCollection('blog')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 2);
 
 const services = [
-  { icon: '&#128167;', title: 'Plomberie', desc: 'Installation, réparation et dépannage de vos équipements sanitaires. Fuites, robinetterie, tuyauterie, raccordements.' },
-  { icon: '&#128293;', title: 'Chauffage', desc: 'Installation et entretien de chaudières gaz, fioul et électriques. Pompes à chaleur, planchers chauffants, radiateurs.' },
-  { icon: '&#9889;', title: 'Électricité', desc: 'Mise aux normes, installation de tableaux électriques, raccordements. Interventions en neuf et rénovation.' },
-  { icon: '&#127777;', title: 'Aérothermie', desc: 'Pompes à chaleur air/eau et air/air. Solutions performantes et économiques pour votre confort thermique.' },
-  { icon: '&#128703;', title: 'Salles de bains', desc: 'Création et rénovation complète clé en main : faïence, carrelage, sanitaires, robinetterie. Délais rapides.' },
-  { icon: '&#10052;', title: 'Climatisation', desc: 'Installation de systèmes de ventilation et climatisation. Confort été comme hiver pour votre habitat.' },
+  { icon: '&#128167;', title: 'Plomberie', desc: 'Installation, réparation et dépannage de vos équipements sanitaires. Fuites, robinetterie, tuyauterie, raccordements.', link: '/plomberie' },
+  { icon: '&#128293;', title: 'Chauffage', desc: 'Installation et entretien de chaudières gaz, fioul et électriques. Pompes à chaleur, planchers chauffants, radiateurs.', link: '/chauffage' },
+  { icon: '&#9889;', title: 'Électricité', desc: 'Mise aux normes, installation de tableaux électriques, raccordements. Interventions en neuf et rénovation.', link: '#contact' },
+  { icon: '&#127777;', title: 'Aérothermie', desc: 'Pompes à chaleur air/eau et air/air. Solutions performantes et économiques pour votre confort thermique.', link: '/chauffage' },
+  { icon: '&#128703;', title: 'Salles de bains', desc: 'Création et rénovation complète clé en main : faïence, carrelage, sanitaires, robinetterie. Délais rapides.', link: '/salles-de-bains' },
+  { icon: '&#10052;', title: 'Climatisation', desc: 'Installation de systèmes de ventilation et climatisation. Confort été comme hiver pour votre habitat.', link: '#contact' },
 ];
 
 const cities = ['Nantes', 'Saint-Herblain', 'Rezé', 'Orvault', 'Vertou', 'Carquefou', 'Bouguenais', 'La Chapelle-sur-Erdre', 'Couëron', 'Sainte-Luce-sur-Loire', 'Saint-Sébastien-sur-Loire', 'Thouaré-sur-Loire'];
@@ -61,7 +61,7 @@ const cities = ['Nantes', 'Saint-Herblain', 'Rezé', 'Orvault', 'Vertou', 'Carqu
             <div class="service-icon" set:html={s.icon} />
             <h3>{s.title}</h3>
             <p>{s.desc}</p>
-            <a href="#contact" class="service-link">Demander un devis &rarr;</a>
+            <a href={s.link} class="service-link">En savoir plus &rarr;</a>
           </div>
         ))}
       </div>
