@@ -1,0 +1,36 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Layout title="Blog | Bourgeais Frédéric - Plombier Chauffagiste Nantes" description="Conseils pratiques en plomberie et chauffage par Frédéric Bourgeais, artisan à Nantes depuis 2001.">
+  <div class="page-header">
+    <div class="container">
+      <p class="section-label">Blog</p>
+      <h1>Conseils & actualités</h1>
+      <p>Retrouvez nos articles pour entretenir vos installations et mieux comprendre nos métiers.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="blog-grid">
+        {posts.map(post => (
+          <a href={`/blog/${post.id}`} class="blog-card reveal">
+            <div class="blog-card-image">&#128221;</div>
+            <div class="blog-card-content">
+              <div class="blog-card-date">
+                {post.data.date.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })}
+              </div>
+              <h3>{post.data.title}</h3>
+              <p>{post.data.description}</p>
+              {post.data.tags?.map(tag => <span class="blog-tag">{tag}</span>)}
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

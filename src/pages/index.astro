@@ -1,0 +1,266 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 2);
+
+const services = [
+  { icon: '&#128167;', title: 'Plomberie', desc: 'Installation, réparation et dépannage de vos équipements sanitaires. Fuites, robinetterie, tuyauterie, raccordements.' },
+  { icon: '&#128293;', title: 'Chauffage', desc: 'Installation et entretien de chaudières gaz, fioul et électriques. Pompes à chaleur, planchers chauffants, radiateurs.' },
+  { icon: '&#9889;', title: 'Électricité', desc: 'Mise aux normes, installation de tableaux électriques, raccordements. Interventions en neuf et rénovation.' },
+  { icon: '&#127777;', title: 'Aérothermie', desc: 'Pompes à chaleur air/eau et air/air. Solutions performantes et économiques pour votre confort thermique.' },
+  { icon: '&#128703;', title: 'Salles de bains', desc: 'Création et rénovation complète clé en main : faïence, carrelage, sanitaires, robinetterie. Délais rapides.' },
+  { icon: '&#10052;', title: 'Climatisation', desc: 'Installation de systèmes de ventilation et climatisation. Confort été comme hiver pour votre habitat.' },
+];
+
+const cities = ['Nantes', 'Saint-Herblain', 'Rezé', 'Orvault', 'Vertou', 'Carquefou', 'Bouguenais', 'La Chapelle-sur-Erdre', 'Couëron', 'Sainte-Luce-sur-Loire', 'Saint-Sébastien-sur-Loire', 'Thouaré-sur-Loire'];
+---
+
+<Layout title="Bourgeais Frédéric | Plombier Chauffagiste à Nantes depuis 2001">
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">Artisan qualifié depuis 2001</div>
+        <h1>Votre plombier<br>chauffagiste à <em>Nantes</em></h1>
+        <p>Installation, entretien et dépannage en plomberie, chauffage et électricité. Interventions en Loire-Atlantique, en neuf comme en rénovation.</p>
+        <div class="hero-ctas">
+          <a href="#contact" class="btn btn-primary">Demander un devis gratuit</a>
+          <a href="tel:0240434217" class="btn btn-outline" style="border-color: rgba(255,255,255,0.3); color: white;">
+            <span>&#9742;</span> 02 40 43 42 17
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <strong>25+</strong>
+            <span>années d'expérience</span>
+          </div>
+          <div class="hero-stat">
+            <strong>44</strong>
+            <span>Loire-Atlantique</span>
+          </div>
+          <div class="hero-stat">
+            <strong>24h</strong>
+            <span>installation chaudière</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="reveal">
+        <p class="section-label">Nos expertises</p>
+        <h2 class="section-title">Des solutions complètes pour<br>votre confort</h2>
+      </div>
+      <div class="services-grid">
+        {services.map((s, i) => (
+          <div class="service-card reveal" style={`transition-delay: ${i * 0.1}s`}>
+            <div class="service-icon" set:html={s.icon} />
+            <h3>{s.title}</h3>
+            <p>{s.desc}</p>
+            <a href="#contact" class="service-link">Demander un devis &rarr;</a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="section about" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-image reveal">
+          <div class="about-image-placeholder">&#128736;</div>
+          <div class="about-experience">
+            <strong>25+</strong>
+            <span>ans d'expérience</span>
+          </div>
+        </div>
+        <div class="about-text reveal">
+          <p class="section-label">L'entreprise</p>
+          <h2>Frédéric Bourgeais,<br>artisan de confiance</h2>
+          <p>Installé à Nantes depuis 2001, Frédéric Bourgeais intervient en Loire-Atlantique et départements limitrophes pour tous vos travaux de plomberie, chauffage et électricité.</p>
+          <p>Que ce soit pour du neuf ou de la rénovation, nous vous proposons des prestations clé en main avec des délais rapides et un travail soigné.</p>
+          <div class="about-features">
+            <div class="about-feature"><span class="check">&#10003;</span> Devis gratuit</div>
+            <div class="about-feature"><span class="check">&#10003;</span> Neuf & rénovation</div>
+            <div class="about-feature"><span class="check">&#10003;</span> Clé en main</div>
+            <div class="about-feature"><span class="check">&#10003;</span> Délais rapides</div>
+            <div class="about-feature"><span class="check">&#10003;</span> Artisan qualifié</div>
+            <div class="about-feature"><span class="check">&#10003;</span> Conseil personnalisé</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Band -->
+  <section class="cta-band">
+    <div class="container">
+      <div>
+        <h2>Un projet ? Une urgence ?</h2>
+        <p>Contactez-nous pour un devis gratuit et sans engagement.</p>
+      </div>
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <a href="tel:0240434217" class="btn btn-white"><span>&#9742;</span> 02 40 43 42 17</a>
+        <a href="#contact" class="btn btn-outline" style="border-color: white; color: white;">Devis en ligne</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Zone d'intervention -->
+  <section class="section zone">
+    <div class="container">
+      <div class="zone-content">
+        <div class="reveal">
+          <p class="section-label" style="color: var(--copper-glow);">Zone d'intervention</p>
+          <h2>Nantes et toute la<br>Loire-Atlantique</h2>
+          <p>Nous intervenons principalement à Nantes et dans les communes environnantes, ainsi que dans les départements limitrophes.</p>
+          <div class="zone-cities">
+            {cities.map(city => <span class="zone-city">{city}</span>)}
+          </div>
+        </div>
+        <div class="zone-map reveal">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d86427.82898785399!2d-1.6265!3d47.2184!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4805ee81f0a8dba1%3A0x40d37521e0d9c30!2sNantes!5e0!3m2!1sfr!2sfr!4v1"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Zone d'intervention Bourgeais Plomberie à Nantes"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog -->
+  {posts.length > 0 && (
+    <section class="section" id="blog">
+      <div class="container">
+        <div class="reveal">
+          <p class="section-label">Conseils & actualités</p>
+          <h2 class="section-title">Nos derniers articles</h2>
+        </div>
+        <div class="blog-grid">
+          {posts.map(post => (
+            <a href={`/blog/${post.id}`} class="blog-card reveal">
+              <div class="blog-card-image">&#128221;</div>
+              <div class="blog-card-content">
+                <div class="blog-card-date">
+                  {post.data.date.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })}
+                </div>
+                <h3>{post.data.title}</h3>
+                <p>{post.data.description}</p>
+                {post.data.tags?.map(tag => <span class="blog-tag">{tag}</span>)}
+              </div>
+            </a>
+          ))}
+        </div>
+        <div style="text-align: center; margin-top: var(--space-lg);">
+          <a href="/blog" class="btn btn-outline">Voir tous les articles</a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Contact -->
+  <section class="section" id="contact" style="background: var(--white);">
+    <div class="container">
+      <div class="reveal">
+        <p class="section-label">Contactez-nous</p>
+        <h2 class="section-title">Demandez votre devis gratuit</h2>
+      </div>
+      <div class="contact-grid">
+        <div class="reveal">
+          <div class="contact-info-card">
+            <div class="contact-info-icon">&#9742;</div>
+            <div><strong>Téléphone</strong><span><a href="tel:0240434217">02 40 43 42 17</a></span></div>
+          </div>
+          <div class="contact-info-card">
+            <div class="contact-info-icon">&#9993;</div>
+            <div><strong>Email</strong><span><a href="mailto:contact@bourgeais-plomberie.fr">contact@bourgeais-plomberie.fr</a></span></div>
+          </div>
+          <div class="contact-info-card">
+            <div class="contact-info-icon">&#128205;</div>
+            <div><strong>Adresse</strong><span>27 bd. Jean Moulin, 44100 Nantes</span></div>
+          </div>
+          <div class="contact-info-card">
+            <div class="contact-info-icon">&#128338;</div>
+            <div><strong>Horaires</strong><span>Lundi - Vendredi : 8h00 - 18h00</span></div>
+          </div>
+        </div>
+        <form class="contact-form reveal" id="contact-form">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-sm);">
+            <div class="form-group">
+              <label for="name">Nom *</label>
+              <input type="text" id="name" name="name" required />
+            </div>
+            <div class="form-group">
+              <label for="phone">Téléphone *</label>
+              <input type="tel" id="phone" name="phone" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+          <div class="form-group">
+            <label for="service">Type de demande</label>
+            <select id="service" name="service">
+              <option value="">Sélectionnez...</option>
+              <option value="plomberie">Plomberie</option>
+              <option value="chauffage">Chauffage</option>
+              <option value="electricite">Électricité</option>
+              <option value="salle-de-bains">Salle de bains</option>
+              <option value="climatisation">Climatisation / Ventilation</option>
+              <option value="autre">Autre</option>
+            </select>
+          </div>
+          <div class="hp-field" aria-hidden="true" style="position: absolute; left: -9999px;">
+            <label for="website">Website</label>
+            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+          </div>
+          <div class="form-group">
+            <label for="message">Votre message *</label>
+            <textarea id="message" name="message" required placeholder="Décrivez votre projet ou votre besoin..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">Envoyer ma demande</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline>
+    {
+      const form = document.getElementById('contact-form');
+      form?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const data = Object.fromEntries(new FormData(form));
+        const btn = form.querySelector('button[type="submit"]');
+        btn.textContent = 'Envoi en cours...';
+        btn.disabled = true;
+        try {
+          const res = await fetch('/contact.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+          });
+          const result = await res.json();
+          if (result.success) {
+            form.innerHTML = '<div style="text-align:center;padding:2rem;"><h3 style="color:var(--copper);margin-bottom:0.5rem;">Merci !</h3><p>Votre message a bien été envoyé. Frédéric vous recontactera dans les plus brefs délais.</p></div>';
+          } else {
+            btn.textContent = 'Envoyer ma demande';
+            btn.disabled = false;
+            alert("Erreur lors de l'envoi. Veuillez réessayer ou appeler directement.");
+          }
+        } catch {
+          btn.textContent = 'Envoyer ma demande';
+          btn.disabled = false;
+          alert("Erreur lors de l'envoi. Veuillez réessayer ou appeler directement.");
+        }
+      });
+    }
+  </script>
+</Layout>

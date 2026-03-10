@@ -1,0 +1,182 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Frédéric Bourgeais, artisan plombier chauffagiste à Nantes depuis 2001. Plomberie, chauffage, électricité, aérothermie, salles de bains. Devis gratuit." } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+import '../styles/global.css';
+---
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonicalURL} />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="fr_FR" />
+  <meta property="og:site_name" content="Bourgeais Frédéric - Plombier Chauffagiste Nantes" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Plumber",
+    "name": "Bourgeais Frédéric",
+    "description": "Artisan plombier chauffagiste à Nantes depuis 2001. Plomberie, chauffage, électricité, aérothermie, salles de bains.",
+    "url": "https://www.chauffage-plomberie-nantes.fr",
+    "telephone": "+33240434217",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "27 bd. Jean Moulin",
+      "addressLocality": "Nantes",
+      "postalCode": "44100",
+      "addressCountry": "FR"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 47.2184,
+      "longitude": -1.5536
+    },
+    "areaServed": {
+      "@type": "GeoCircle",
+      "geoMidpoint": { "@type": "GeoCoordinates", "latitude": 47.2184, "longitude": -1.5536 },
+      "geoRadius": "50000"
+    },
+    "foundingDate": "2001",
+    "priceRange": "€€"
+  })} />
+</head>
+<body>
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="header-top">
+      <div class="container">
+        <span>Artisan plombier chauffagiste depuis 2001</span>
+        <div style="display: flex; gap: 1.5rem;">
+          <a href="tel:0240434217">02 40 43 42 17</a>
+          <a href="mailto:contact@bourgeais-plomberie.fr">contact@bourgeais-plomberie.fr</a>
+        </div>
+      </div>
+    </div>
+    <div class="header-main">
+      <div class="container">
+        <a href="/" class="logo">
+          <div class="logo-mark">FB</div>
+          <div class="logo-text">
+            <strong>Bourgeais</strong>
+            <span>Plomberie &middot; Chauffage</span>
+          </div>
+        </a>
+        <nav class="nav" id="nav">
+          <a href="/">Accueil</a>
+          <a href="/#services">Services</a>
+          <a href="/#about">L'entreprise</a>
+          <a href="/blog">Blog</a>
+          <a href="/#contact">Contact</a>
+          <a href="/#contact" class="btn btn-primary">Devis gratuit</a>
+        </nav>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <slot />
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-about">
+          <a href="/" class="logo">
+            <div class="logo-mark">FB</div>
+            <div class="logo-text">
+              <strong>Bourgeais</strong>
+              <span>Plomberie &middot; Chauffage</span>
+            </div>
+          </a>
+          <p>Artisan plombier chauffagiste installé à Nantes depuis 2001. Interventions en Loire-Atlantique et départements limitrophes pour vos travaux de plomberie, chauffage et électricité.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Services</h4>
+          <a href="/#services">Plomberie</a>
+          <a href="/#services">Chauffage</a>
+          <a href="/#services">Électricité</a>
+          <a href="/#services">Salles de bains</a>
+          <a href="/#services">Climatisation</a>
+        </div>
+        <div class="footer-links">
+          <h4>Navigation</h4>
+          <a href="/">Accueil</a>
+          <a href="/#about">L'entreprise</a>
+          <a href="/blog">Blog</a>
+          <a href="/#contact">Contact</a>
+          <a href="/#contact">Devis gratuit</a>
+        </div>
+        <div class="footer-links">
+          <h4>Contact</h4>
+          <a href="tel:0240434217">02 40 43 42 17</a>
+          <a href="mailto:contact@bourgeais-plomberie.fr">contact@bourgeais-plomberie.fr</a>
+          <span style="color: rgba(255,255,255,0.6); font-size: 0.9rem; display: block; padding: 0.3rem 0;">27 bd. Jean Moulin<br>44100 Nantes</span>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; {new Date().getFullYear()} Bourgeais Frédéric. Tous droits réservés.</span>
+        <div style="display: flex; gap: 1rem;">
+          <a href="/mentions-legales">Mentions légales</a>
+          <a href="/politique-confidentialite">Politique de confidentialité</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('nav');
+    hamburger?.addEventListener('click', () => {
+      nav?.classList.toggle('open');
+    });
+
+    // Close menu on link click
+    nav?.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => nav?.classList.remove('open'));
+    });
+
+    // Header scroll effect
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header?.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

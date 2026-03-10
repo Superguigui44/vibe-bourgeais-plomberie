@@ -1,0 +1,27 @@
+backend:
+  name: github
+  repo: Superguigui44/vibe-bourgeais-plomberie
+  branch: main
+
+media_folder: "public/images"
+public_folder: "/images"
+
+locale: "fr"
+
+collections:
+  - name: "blog"
+    label: "Articles de blog"
+    folder: "src/content/blog"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Titre", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Date de publication", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Image", name: "image", widget: "image", required: false }
+      - label: "Tags"
+        name: "tags"
+        widget: "list"
+        required: false
+        field: { label: "Tag", name: "tag", widget: "string" }
+      - { label: "Contenu", name: "body", widget: "markdown" }
